@@ -103,8 +103,10 @@ options { disableConcurrentBuilds() }
       steps {
         script {
           commitId = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
-          sh 'git bisect start "$commitId" "$previousSuccessBuildHash"'
-          sh 'git bisect run mvn clean test'
+          echo "$commitId"
+          echo "$previousSuccessBuildHash"
+          sh "git bisect start ${commitId} ${previousSuccessBuildHash}"
+          sh "git bisect run mvn clean test"
         }
       }
     }
@@ -149,4 +151,3 @@ options { disableConcurrentBuilds() }
         }
     }
 }
-
