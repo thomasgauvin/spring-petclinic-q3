@@ -53,17 +53,6 @@ pipeline {
         }
       }
     }
-    stage('Build') {
-      when {
-        expression { previousSuccessBuildHash == 'null' || commitsCount >= 8 }
-      }
-      steps {
-        sh 'mvn clean compile'
-        script {
-          next = 'test'
-        }
-      }
-    }
     stage('Increase Count') {
       when {
         expression { commitsCount < 8 }
@@ -74,6 +63,17 @@ pipeline {
           next = 'finish'
         }
         writeFile file: './commitsCount.txt', text: "$commitsCount"
+      }
+    }
+    stage('Build') {
+      when {
+        expression { previousSuccessBuildHash == 'null' || commitsCount >= 8 }
+      }
+      steps {
+        sh 'mvn clean compile'
+        script {
+          next = 'test'
+        }
       }
     }
     stage('Test') {
@@ -117,6 +117,12 @@ pipeline {
           next = 'finish' 
           commitId = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
           writeFile file: './previousSuccessBuildHash.txt', text: "$commitId"
+          
+          if(commitsCount>=8){
+            //reset counter since batch finished
+            commitsCount = 0
+            writeFile file: './commitsCount.txt', text: "$commitsCount" 
+          }
         }
       }
     }
