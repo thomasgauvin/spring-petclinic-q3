@@ -12,6 +12,8 @@ pipeline {
           steps{
               script{
                   sh 'echo "${commitsCount}"'
+                  sh 'echo "${previousSuccessBuildHash}"'
+
                   sh 'echo "${commitsCount}" > commitsCount.txt'
                   sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
               }
