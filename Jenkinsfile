@@ -27,7 +27,9 @@ pipeline {
     stage('8 or more commits?'){
       steps {
         script {
-          commitsCount = readFile('commitsCount.txt').trim() as int
+          tmp = readFile('commitsCount.txt')
+          commitsCount = tmp as int
+          sh 'echo ${commitsCount}'
         }
       }
     }
