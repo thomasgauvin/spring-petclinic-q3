@@ -90,6 +90,8 @@ pipeline {
       when {
         expression { next == 'finish' } 
       }
+      steps {
+      }
     }
   }
   post {
