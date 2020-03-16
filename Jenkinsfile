@@ -91,14 +91,14 @@ pipeline {
         expression { next == 'finish' } 
       }
       steps {
+        script {
+          if(tests_pass){
+            currentBuild.result = "SUCCESS" 
+          } else {
+            currentBuild.result = "FAILURE"
+          } 
+        }
       }
     }
   }
-  post {
-    if(tests_pass){
-      currentBuild.result = "SUCCESS" 
-    } else {
-      currentBuild.result = "FAILURE"
-    } 
-}
 }
