@@ -13,6 +13,7 @@ pipeline {
               script{
                   sh 'echo ${commitsCount}'
                 sh 'echo "${previousSuccessBuildHash}"' 
+                sh 'echo "something supposed to output here!"'
                 if (!fileExists('commitsCount.txt')) {
                     sh 'echo ${commitsCount} > commitsCount.txt'
                 }
