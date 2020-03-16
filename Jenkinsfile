@@ -11,18 +11,12 @@ pipeline {
       stage('Setup Jenkins'){
           steps{
               script{
-                commitsCount = 45
-                previousSuccessBuildHash = 'smething'
-                
-                echo "$commitsCount"
-                echo "$previousSuccessBuildHash"
-                sh 'echo "something supposed to output here!"'
                 if (!fileExists('commitsCount.txt')) {
-                    sh 'echo ${commitsCount} > commitsCount.txt'
+                    sh 'echo "$commitsCount" > commitsCount.txt'
                 }
 
                 if (!fileExists('previousSuccessBuildHash.txt')) {
-                    sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
+                    sh 'echo "$previousSuccessBuildHash" > previousSuccessBuildHash.txt'
                 }
               
               }
@@ -64,7 +58,7 @@ pipeline {
           commitsCount++
           next = 'finish'
         }
-        sh 'echo "${commitsCount}" > commitsCount.txt'
+        sh 'echo "$commitsCount" > commitsCount.txt'
       }
     }
     stage('Test') {
@@ -93,7 +87,7 @@ pipeline {
       steps {
         script {
           commitId = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
-          sh 'git bisect start ${commitId} ${previousSuccessBuildHash}'
+          sh 'git bisect start "$commitId" "$previousSuccessBuildHash"'
           sh 'git bisect run mvn clean test'
         }
       }
