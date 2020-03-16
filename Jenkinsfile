@@ -115,6 +115,8 @@ pipeline {
         sh 'mvn package'
         script {
           next = 'finish' 
+          commitId = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+          writeFile file: './previousSuccessBuildHash.txt', text: "$commitId"
         }
       }
     }
