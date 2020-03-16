@@ -15,6 +15,7 @@ pipeline {
                     projectName: 'spring-petclinic-q3',
                     filter: "*.txt"]);
             }
+          }
         }
     
       stage('Setup Jenkins'){
