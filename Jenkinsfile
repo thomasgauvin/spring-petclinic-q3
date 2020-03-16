@@ -11,6 +11,7 @@ pipeline {
       stage('Prepare jenkins'){
           steps{
               script{
+                  sh 'echo "${commitsCount}"'
                   sh 'echo "${commitsCount}" > commitsCount.txt'
                   sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
               }
@@ -28,7 +29,7 @@ pipeline {
       steps {
         script {
           tmp = readFile('commitsCount.txt')
-          sh 'echo ${commitsCount.txt}'
+          sh 'echo "${commitsCount.txt}"'
           commitsCount = tmp as int
           sh 'echo ${commitsCount}'
         }
