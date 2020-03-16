@@ -121,8 +121,8 @@ pipeline {
   }
     post {
         always {
-            archiveArtifacts artifacts: 'previousSuccessBuild', onlyIfSuccessful: true
-            archiveArtifacts artifacts: 'count', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'previousSuccessBuildHash.txt', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'commitsCount.txt', onlyIfSuccessful: true
         }
     }
 }
