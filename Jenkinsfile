@@ -44,21 +44,22 @@ pipeline {
         sh 'echo "${commitsCount}" > commitsCount.txt'
       }
     }
-    try{
-      stage('Test') {
-        when {
-          expression { next == 'test' }
-        }
-        steps {
+    stage('Test') {
+      when {
+        expression { next == 'test' }
+      }
+      steps {
+        try{
           sh 'mvn test'
           script {
             next = 'package'
           }
         }
+        catch(e) {
+          next = 'finish'
+          tests_pass = false 
+        }
       }
-    } catch(e) {
-      next = 'finish'
-      tests_pass = false 
     }
     stage('Git Bisect') {
       when {
