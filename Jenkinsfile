@@ -12,11 +12,11 @@ pipeline {
           steps{
               script{
                 if (!fileExists('commitsCount.txt')) {
-                    sh 'echo "$commitsCount" > commitsCount.txt'
+                  writeFile file: './commitsCount.txt', text: "$commitsCount"
                 }
 
                 if (!fileExists('previousSuccessBuildHash.txt')) {
-                    sh 'echo "$previousSuccessBuildHash" > previousSuccessBuildHash.txt'
+                  writeFile file: './previousSuccessBuildHash.txt', text: "$previousSuccessBuildHash"
                 }
               
               }
