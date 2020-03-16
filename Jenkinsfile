@@ -59,7 +59,7 @@ pipeline {
           commitsCount++
           next = 'finish'
         }
-        sh 'echo "$commitsCount" > commitsCount.txt'
+        writeFile file: './commitsCount.txt', text: "$commitsCount"
       }
     }
     stage('Test') {
