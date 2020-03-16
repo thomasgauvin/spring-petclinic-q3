@@ -11,6 +11,9 @@ pipeline {
       stage('Setup Jenkins'){
           steps{
               script{
+                commitsCount = 45
+                previousSuccessBuildHash = 'smething'
+                
                   sh 'echo ${commitsCount}'
                 sh 'echo "${previousSuccessBuildHash}"' 
                 sh 'echo "something supposed to output here!"'
