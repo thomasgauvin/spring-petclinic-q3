@@ -11,10 +11,14 @@ pipeline {
         stage('Copy Archive') {
          steps {
              script {
-                step ([$class: 'CopyArtifact',
-                    projectName: 'spring-petclinic-q3',
-                    filter: "*.txt"]);
-            }
+                  if (currentBuild.previousBuild) {
+                      try {
+                          copyArtifacts(projectName: currentBuild.projectName)
+                      } catch(err) {
+                          // ignore error
+                      }
+                  }
+              }
           }
         }
     
