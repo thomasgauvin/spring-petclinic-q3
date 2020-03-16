@@ -11,13 +11,13 @@ pipeline {
       stage('Prepare jenkins'){
           steps{
               script{
-                  if (!fileExists('commitsCount.txt')) {
+                  
                         sh 'echo "${commitsCount}" > commitsCount.txt'
-                    }
+                    
 
-                    if (!fileExists('previousSuccessBuildHash.txt')) {
+                    
                         sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
-                    }
+                    
               }
           }
       }
