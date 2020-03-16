@@ -1,7 +1,7 @@
-def previousSuccessBuildHash = 'null'
-def commitsCount = 0
-def next = 'null'
-def tests_pass = true
+def previousSuccessBuildHash
+def commitsCount
+def next
+def tests_pass
 
 
 
@@ -11,6 +11,11 @@ pipeline {
       stage('Prepare jenkins'){
           steps{
               script{
+                  previousSuccessBuildHash = 'null'
+                  commitsCount = 0
+                  next = 'null'
+                  tests_pass = true
+                
                   sh 'echo "${commitsCount}"'
                   sh 'echo "${previousSuccessBuildHash}"'
 
