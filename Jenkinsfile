@@ -3,17 +3,24 @@ def commitsCount = 0
 def next = 'null'
 def tests_pass = true
 
-if (!fileExists('commitsCount.txt')) {
-    sh 'echo "${commitsCount}" > commitsCount.txt'
-}
 
-if (!fileExists('previousSuccessBuildHash.txt')) {
-    sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
-}
 
 pipeline {
   agent any
   stages {
+      stage('Prepare jenkins'){
+          steps{
+              script{
+                  if (!fileExists('commitsCount.txt')) {
+                        sh 'echo "${commitsCount}" > commitsCount.txt'
+                    }
+
+                    if (!fileExists('previousSuccessBuildHash.txt')) {
+                        sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
+                    }
+              }
+          }
+      }
     
     stage('Previously Success Build Hash Stored?') {
       steps {
