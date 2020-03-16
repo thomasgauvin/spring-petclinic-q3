@@ -8,6 +8,15 @@ def tests_pass = true
 pipeline {
   agent any
   stages {
+        stage('Copy Archive') {
+         steps {
+             script {
+                step ([$class: 'CopyArtifact',
+                    projectName: 'spring-petclinic-q3',
+                    filter: "*.txt"]);
+            }
+        }
+    
       stage('Setup Jenkins'){
           steps{
               script{
