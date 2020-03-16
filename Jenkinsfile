@@ -119,9 +119,11 @@ pipeline {
       }
     }
   }
+    post {
+        always {
+            archiveArtifacts artifacts: 'previousSuccessBuild', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'count', onlyIfSuccessful: true
+        }
+    }
 }
 
-always {
-    archiveArtifacts artifacts: 'previousSuccessBuild', onlyIfSuccessful: true
-    archiveArtifacts artifacts: 'count', onlyIfSuccessful: true
-}
