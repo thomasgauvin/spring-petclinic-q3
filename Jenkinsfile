@@ -28,6 +28,7 @@ pipeline {
       steps {
         script {
           tmp = readFile('commitsCount.txt')
+          sh 'echo ${commitsCount.txt}'
           commitsCount = tmp as int
           sh 'echo ${commitsCount}'
         }
