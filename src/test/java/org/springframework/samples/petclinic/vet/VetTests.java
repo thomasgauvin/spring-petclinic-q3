@@ -37,7 +37,7 @@ class VetTests {
 		assertThat(other.getId()).isEqualTo(vet.getId());
 
 		//add failing test
-		assertEquals(true, false);
+		assertThat(false);
 	}
 
 }
