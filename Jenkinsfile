@@ -7,6 +7,7 @@ def tests_pass = true
 
 pipeline {
   agent any
+options { disableConcurrentBuilds() }
   stages {
         stage('Copy Archive') {
          steps {
