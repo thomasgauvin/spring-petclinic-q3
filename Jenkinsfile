@@ -144,5 +144,10 @@ options { disableConcurrentBuilds() }
       }
     }
   }
+    post {
+        always {
+            archiveArtifacts artifacts: 'previousSuccessBuildHash.txt', onlyIfSuccessful: true
+            archiveArtifacts artifacts: 'commitsCount.txt', onlyIfSuccessful: true
+        }
+    }
 }
-
