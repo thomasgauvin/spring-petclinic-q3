@@ -41,7 +41,7 @@ pipeline {
     }
     stage('Build') {
       when {
-        expression { previousSuccessBuildHash != 'null' || commitsCount >= 8 }
+        expression { previousSuccessBuildHash == 'null' || commitsCount >= 8 }
       }
       steps {
         sh 'mvn clean compile'
