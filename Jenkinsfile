@@ -32,7 +32,7 @@ pipeline {
     stage('8 or more commits?'){
       steps {
         script {
-          commitsCount = readFile('commitsCount.txt').trim()
+          commitsCount = readFile('commitsCount.txt').trim() as int
         }
       }
     }
