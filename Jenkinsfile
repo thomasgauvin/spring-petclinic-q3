@@ -1,29 +1,19 @@
-def previousSuccessBuildHash
-def commitsCount
-def next
-def tests_pass
+def previousSuccessBuildHash = 'null'
+def commitsCount = 0
+def next = 'null'
+def tests_pass = true
 
+if (!fileExists('commitsCount.txt')) {
+    sh 'echo "${commitsCount}" > commitsCount.txt'
+}
 
+if (!fileExists('previousSuccessBuildHash.txt')) {
+    sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
+}
 
 pipeline {
   agent any
   stages {
-      stage('Prepare jenkins'){
-          steps{
-              script{
-                  previousSuccessBuildHash = 'null'
-                  commitsCount = 0
-                  next = 'null'
-                  tests_pass = true
-                
-                  sh 'echo "${commitsCount}"'
-                  sh 'echo "${previousSuccessBuildHash}"'
-
-                  sh 'echo "${commitsCount}" > commitsCount.txt'
-                  sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
-              }
-          }
-      }
     
     stage('Previously Success Build Hash Stored?') {
       steps {
@@ -35,10 +25,7 @@ pipeline {
     stage('8 or more commits?'){
       steps {
         script {
-          tmp = readFile('commitsCount.txt')
-          sh 'echo "${commitsCount.txt}"'
-          commitsCount = tmp as int
-          sh 'echo ${commitsCount}'
+          commitsCount = readFile('commitsCount.txt').trim()
         }
       }
     }
