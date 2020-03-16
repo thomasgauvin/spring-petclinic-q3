@@ -11,7 +11,8 @@ pipeline {
       stage('Setup Jenkins'){
           steps{
               script{
-                  
+                  sh 'echo ${commitsCount}'
+                sh 'echo "${previousSuccessBuildHash}"' 
                 if (!fileExists('commitsCount.txt')) {
                     sh 'echo ${commitsCount} > commitsCount.txt'
                 }
