@@ -11,13 +11,8 @@ pipeline {
       stage('Prepare jenkins'){
           steps{
               script{
-                  
-                        sh 'echo "${commitsCount}" > commitsCount.txt'
-                    
-
-                    
-                        sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
-                    
+                  sh 'echo "${commitsCount}" > commitsCount.txt'
+                  sh 'echo "${previousSuccessBuildHash}" > previousSuccessBuildHash.txt'
               }
           }
       }
