@@ -49,15 +49,17 @@ pipeline {
         expression { next == 'test' }
       }
       steps {
-        try{
-          sh 'mvn test'
-          script {
-            next = 'package'
+        script {
+          try{
+            sh 'mvn test'
+            script {
+              next = 'package'
+            }
           }
-        }
-        catch(e) {
-          next = 'finish'
-          tests_pass = false 
+          catch(e) {
+            next = 'finish'
+            tests_pass = false 
+          }
         }
       }
     }
