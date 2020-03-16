@@ -14,8 +14,8 @@ pipeline {
                 commitsCount = 45
                 previousSuccessBuildHash = 'smething'
                 
-                echo ${commitsCount}
-                echo "${previousSuccessBuildHash}"
+                echo '${commitsCount}'
+                echo '${previousSuccessBuildHash}'
                 sh 'echo "something supposed to output here!"'
                 if (!fileExists('commitsCount.txt')) {
                     sh 'echo ${commitsCount} > commitsCount.txt'
