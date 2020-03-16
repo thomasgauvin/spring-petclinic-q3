@@ -120,3 +120,8 @@ pipeline {
     }
   }
 }
+
+always {
+    archiveArtifacts artifacts: 'previousSuccessBuild', onlyIfSuccessful: true
+    archiveArtifacts artifacts: 'count', onlyIfSuccessful: true
+}
