@@ -68,9 +68,11 @@ pipeline {
         expression { tests_pass == false && previousSuccessBuildHash != 'null' }
       }
       steps {
-        commitId = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
-        sh 'git bisect start ${commitId} ${previousSuccessBuildHash}'
-        sh 'git bisect run mvn clean test'
+        script {
+          commitId = sh(returnStdout: true, script: "git rev-parse HEAD").trim()
+          sh 'git bisect start ${commitId} ${previousSuccessBuildHash}'
+          sh 'git bisect run mvn clean test'
+        }
       }
     }
     stage('Package') {
