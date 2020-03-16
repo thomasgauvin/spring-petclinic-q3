@@ -34,6 +34,7 @@ pipeline {
       steps {
         script {
           tmp = readFile('commitsCount.txt').trim()
+          echo "$tmp"
           commitsCount= tmp as int
         }
       }
